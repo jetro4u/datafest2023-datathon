@@ -3,6 +3,97 @@ Identify fact Tables based on key performance indicators (KPIs) or metrics of yo
 Create and populate the initial fact tables using the cleaned and transformed data.
 [Check code here](https://github.com/jetro4u/datafest2023-datathon/blob/main/day2-task2.sql).
 */
+<<<<<<< HEAD
+
+/*
+CREATE CROP FACTS TABLE
+*/
+-- Create the fact table
+CREATE TABLE farm_fact_table (
+    factid SERIAL PRIMARY KEY,
+    timekey INT,
+    IrrigationId INT,
+    CropId INT,
+    PestId INT,
+    SoilId INT,
+    WeatherId INT,
+    SensorId INT,
+    FOREIGN KEY (timekey) REFERENCES Time(timekey),
+    FOREIGN KEY (IrrigationId) REFERENCES IrrigationDimension(IrrigationId),
+    FOREIGN KEY (CropId) REFERENCES CropDimension(CropId),
+    FOREIGN KEY (PestId) REFERENCES PestDimension(PestId),
+    FOREIGN KEY (SoilId) REFERENCES SoilDimension(SoilId),
+    FOREIGN KEY (WeatherId) REFERENCES WeatherDimension(WeatherId),
+    FOREIGN KEY (SensorId) REFERENCES SensorDimension(SensorId)
+);
+
+INSERT INTO farm_fact_table (timekey, IrrigationId, CropId, PestId, SoilId, WeatherId, SensorId)
+SELECT
+    t.timekey,
+    id.IrrigationId,
+    cd.CropId,
+    pd.PestId,
+    sd.SoilId,
+    wd.WeatherId,
+    sd.SensorId
+FROM
+    (SELECT timekey FROM Time) AS t
+LEFT JOIN
+    (SELECT IrrigationId FROM IrrigationDimension) AS id ON true
+LEFT JOIN
+    (SELECT CropId FROM CropDimension) AS cd ON true
+LEFT JOIN
+    (SELECT PestId FROM PestDimension) AS pd ON true
+LEFT JOIN
+    (SELECT SoilId FROM SoilDimension) AS sd ON true
+LEFT JOIN
+    (SELECT WeatherId FROM WeatherDimension) AS wd ON true
+LEFT JOIN
+    (SELECT SensorId FROM SensorDimension) AS sd ON true;
+
+
+
+-- Create the fact table for KPI results
+CREATE TABLE soil_fact_metrics (
+    factId SERIAL PRIMARY KEY,
+    TimeId INT REFERENCES Time(timekey),
+    SoilId INT REFERENCES SoilDimension(SoilId),
+    CropId INT REFERENCES CropDimension(CropId),
+    SensorId INT REFERENCES SensorDimension(SensorId),
+    IrrigationId INT REFERENCES IrrigationDimension(IrrigationId),
+    WeatherId INT REFERENCES WeatherDimension(WeatherId),
+    Soil_Health_Index NUMERIC,
+    Nutrient_Balance NUMERIC,
+    Nutrient_Available_Index NUMERIC
+);
+
+
+CREATE TABLE CROPFACTMETRICS (
+    fact_id SERIAL PRIMARY KEY,
+    time_id INT REFERENCES time_dim(time_id),
+    CropId INT REFERENCES crop_dim(CropId),
+    growth_stage VARCHAR(255),
+    pest_issue BOOLEAN,
+    crop_yield DECIMAL(10, 2),
+    -- Add other fact-related attributes as needed
+);
+INSERT INTO crop_fact (time_id, CropId, growth_stage, pest_issue, crop_yield)
+SELECT
+    t.time_id,
+    c.CropId,
+    crd.growth_stage,
+    crd.pest_issue,
+    crd.crop_yield
+FROM
+    croprawdata crd
+JOIN
+    time_dim t ON crd.timestamp = t.timestamp
+JOIN
+    crop_dim c ON crd.crop_type = c.crop_type;
+
+
+
+=======
 CREATE TABLE irrigationmetrics (
     id BIGSERIAL PRIMARY KEY,
     sensorid VARCHAR (10),
@@ -23,6 +114,7 @@ CREATE TABLE cropmetrics (
 	pestissue TEXT,
 	cropyield DECIMAL(8, 2)
 );
+>>>>>>> 7edb145683e9357a0978bd5769a18b764237a5d0
 CREATE TABLE pestmetrics (
     id BIGSERIAL PRIMARY KEY,
 	timestamp TIMESTAMP,
@@ -31,6 +123,86 @@ CREATE TABLE pestmetrics (
 	pestdescription TEXT,
 	pestseverity VARCHAR(20)
 );
+<<<<<<< HEAD
+
+INSERT INTO soil_fact_metrics (TimeId, SoilId, CropId, SensorId, IrrigationId, WeatherId, Soil_Health_Index,  Nutrient_Balance, Nutrient_Available_Index)
+SELECT
+    ti.TimeId,
+    so.SoilId,
+    cr.Crop_Type,
+    cr.Crop_Yield,
+    cr.Growth_Stage,
+    cr.Pest_Issue,
+    se.Temperature,
+    se.Humidity,
+    se.Light_Intensity,
+    ir.IrrigationId,
+    we.Weather_Condition,
+    we.Wind_Speed,
+    we.Precipitation,
+    ir.Irrigation_Duration,
+    (so.Soil_Moisture + so.Organic_Matter) / 2 AS Soil_Health_Index,
+    (so.nitrogen_level - so.phosphorus_level) AS Nutrient_Balance,
+    (irrigation.water_applied - weather.evaporation) / sr.soil_moisture AS Nutrient_Available_Index,
+FROM
+    time_dim td
+JOIN
+    SoilDimension so ON so.timestamp = td.timestamp
+JOIN
+    CropDimension cr ON cr.CropId = so.CropId
+JOIN
+    SensorDimension se ON se.SensorId = so.SensorId
+JOIN
+    IrrigationDimension ir ON ir.IrrigationId = so.IrrigationId
+JOIN
+    WeatherDimension we ON we.WeatherId = so.WeatherId;
+
+
+SELECT
+    td.fulldate,
+    so.SoilId,
+    cr.CropId,
+    cr.Crop_Yield,
+    cr.Growth_Stage,
+    cr.Pest_Issue,
+    se.Temperature_F,
+    se.Humidity,
+    se.Light_Intensity,
+    ir.IrrigationId,
+    we.Weather_Condition,
+    we.Wind_Speed,
+    we.Precipitation,
+    ir.Irrigation_Duration_Min,
+    (so.Soil_Moisture + so.Organic_Matter) / 2 AS Soil_Health_Index,
+    (so.nitrogen_level - so.phosphorus_level) AS Nutrient_Balance
+FROM
+    Time td
+LEFT JOIN
+    SoilDimension so ON so.timestamp = td.fulldate
+LEFT JOIN
+    CropDimension cr ON cr.timestamp = td.fulldate
+LEFT JOIN
+    SensorDimension se ON se.timestamp = td.fulldate
+LEFT JOIN
+    IrrigationDimension ir ON ir.timestamp = td.fulldate
+LEFT JOIN
+    WeatherDimension we ON we.timestamp = td.fulldate;
+
+
+
+
+CREATE TABLE farm_fact_metrics (
+    factid SERIAL,
+    ti.timekey,
+    irrigationid SERIAL,
+    cropid SERIAL,
+    pestid SERIAL,
+    soilid SERIAL,
+    sensorid SERIAL,
+    weatherid SERIAL
+);
+
+=======
 CREATE TABLE soilmetrics (
     id BIGSERIAL PRIMARY KEY,
 	timestamp TIMESTAMP,
@@ -94,6 +266,7 @@ ALTER TABLE cropmetrics ADD CONSTRAINT fk_growthstage
  FOREIGN KEY (growthstageid) REFERENCES growthstage(id);
 ALTER TABLE pestmetrics ADD CONSTRAINT fk_pesttype
  FOREIGN KEY (pesttypeid) REFERENCES pesttype(id);
+>>>>>>> 7edb145683e9357a0978bd5769a18b764237a5d0
 
 /* POPULATE FACTS TABLE. YOU CAN ALSO YOU THE SELECT STATEMENT TO QUERY THE DATA */
 INSERT INTO irrigationmetrics (sensorid, timestamp, irrigationdurationmin, irrigationmethod, watersource) 
@@ -124,6 +297,34 @@ JOIN
 JOIN
     growthstage t3 ON t1.id = t3.id;
 
+<<<<<<< HEAD
+
+
+INSERT INTO farmmetrics (sensorid, temperaturef, humidity, soilmoisture, lightintensity, batterylevel, timeid, locationid, irrigationid, cropid, pestid, soilid, weatherid ) 
+SELECT
+    t1.id AS timeid,
+    t2.id AS irrigationid,
+    t3.id AS cropid,
+    t4.id AS pestid,
+    t5.id AS sensorid,
+    t6.id AS soilid,
+    t7.id AS weatherid
+FROM
+    Time t1
+LEFT JOIN
+JOIN
+   irrigationdimension t2 ON t1.id = t2.id
+JOIN
+   cropdimension t3 ON t3.id = t3.id
+JOIN
+   soildimension t4 ON t1.id = t4.id
+JOIN
+   pestdimension t5 ON t1.id = t6.id
+JOIN
+   sensordimension t7 ON t1.id = t7.id
+JOIN
+   weatherdimension t8 ON t1.id = t8.id
+=======
 INSERT INTO pestmetrics (timestamp, pestdescription, pestseverity, pesttype) 
 SELECT
     t1.timestamp AS timestamp,
@@ -174,3 +375,4 @@ JOIN
    soilmetrics t7 ON t1.id = t7.id
 JOIN
    weathermetrics t8 ON t1.id = t8.id
+>>>>>>> 7edb145683e9357a0978bd5769a18b764237a5d0
