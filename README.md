@@ -47,28 +47,22 @@ Conduct final testing to ensure the accuracy and consistency of the data.
 Prepare the data warehouse for querying by data analysts and scientists.
 [Check code here](https://github.com/jetro4u/datafest2023-datathon/blob/main/day3-task2.sql).
 
-##  FILE UPLOAD: 
+#  FILE UPLOAD: 
 Because of the size of this files, I will provide link to download the files below.
 
-# SUB DIMENSION FILES
+## SUB DIMENSION FILES
+Sub Dimension Files such as Irrigation Method, Crop Type
+Link [Click here to download](https://drive.google.com/file/d/1ZGZnIJV-XT7tWBy9bCwPKoZvWOHi88AA/view?usp=sharing). 
+
 
 # DIMENSION FILES
 
-# DIMENSION FILES
+[Crop and Soil Dimension](https://drive.google.com/file/d/1P1mVb9eiFnRWhCzawGWXNqSmwlXWn-Dz/view?usp=sharing). 
+
+[Irrigation ans Sensor](https://drive.google.com/file/d/1Y6PvJTpG2xKyD-Viz-8UWzo8X7LykgTU/view?usp=sharing). 
+
+[Pest and Weather](https://drive.google.com/file/d/1ltZ7cwoM4ZRm-CVibQtNSLuV8aVJy8oo/view?usp=sharing). 
 
 
-1. [Dimension Data](https://drive.google.com/file/d/13O2GwAkNWR4qTPxYFHixz_-Cj-c3lDaY/view?usp=sharing).
-
-2. [Farm Fact Metrics](https://drive.google.com/file/d/1yATZ-W-8NillhicYiEf7gKBp0yeyAput/view?usp=sharing).
-
-3. [Crop Metrics](https://drive.google.com/file/d/1_wnLjN1KUKs2mBEfgPF1tjbKHKmIypUb/view?usp=sharing).
-
-4. [Irrigation Metrics](https://drive.google.com/file/d/1-4qo_sXRLpquAI01Ad8UJGORpTuDRlrB/view?usp=sharing).
-
-5. [Pest Metrics](https://drive.google.com/file/d/1-4qo_sXRLpquAI01Ad8UJGORpTuDRlrB/view?usp=sharing).
-
-6. [Soil Metrics](https://drive.google.com/file/d/1RIO1Y1qIhJVDjZXjdmgmbYfxryhjdZiU/view?usp=sharing).
-
-7. [Weather Metrics](https://drive.google.com/file/d/1BEdxsXIpxjvyqdddtphRBZhPKIw1iJTH/view?usp=sharing).
-
-8. [Location Data](https://drive.google.com/file/d/15iqKwD7dzx8LujriBHLABBF2LkhQP2qj/view?usp=sharing).
+Sub Dimension Files such as Irrigation Method, Crop Type
+Link [Location and Time](https://drive.google.com/file/d/1Wq466C8P1BfQhlNzPtoPzqODubk7fTNA/view?usp=sharing). 
