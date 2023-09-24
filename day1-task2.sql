@@ -71,12 +71,6 @@ WHERE light_intensity LIKE '%NA%';
 
 /*REMOVE CHARACTERS FROM Sensor_Id VALUES IN RAW DATA*/
 UPDATE stage_sensordataraw SET Sensor_Id = REPLACE(Sensor_Id, '"', '');
-UPDATE stage_irrigationdataraw SET Sensor_Id = REPLACE(Sensor_Id, '*', '');
-UPDATE stage_irrigationdataraw SET Sensor_Id = REPLACE(Sensor_Id, '_', '');
-UPDATE stage_irrigationdataraw SET Sensor_Id = REPLACE(Sensor_Id, '#', '');
-UPDATE stage_locationdataraw SET Sensor_Id = REPLACE(Sensor_Id, '*', '');
-UPDATE stage_locationdataraw SET Sensor_Id = REPLACE(Sensor_Id, '_', '');
-UPDATE stage_locationdataraw SET Sensor_Id = REPLACE(Sensor_Id, '#', '');
 
 
 /* UPDATE MISSPELT WORD */
@@ -166,19 +160,6 @@ FROM stage_weatherdataraw
 WHERE timestamp IS NULL AND weather_condition IS NULL AND wind_speed IS NULL AND precipitation IS NULL;
 
 /* TRANSFORM DATA TO THE RIGHT DATA TYPE */
-ALTER TABLE stage_locationdataraw ALTER COLUMN Sensor_Id SET DATA TYPE VARCHAR(11);
-ALTER TABLE stage_locationdataraw ALTER COLUMN Location_Name SET DATA TYPE VARCHAR(30);
-ALTER TABLE stage_locationdataraw ALTER COLUMN latitude SET DATA TYPE DECIMAL(8, 6) USING latitude::DECIMAL(8, 6);
-ALTER TABLE stage_locationdataraw ALTER COLUMN longitude SET DATA TYPE DECIMAL(9, 6) USING longitude::DECIMAL(9, 6);
-ALTER TABLE stage_locationdataraw ALTER COLUMN elevation SET DATA TYPE DECIMAL(8, 2) USING elevation::DECIMAL(8, 2);
-ALTER TABLE stage_locationdataraw ALTER COLUMN region SET DATA TYPE VARCHAR(20);
-
-ALTER TABLE stage_irrigationdataraw ALTER COLUMN Sensor_Id SET DATA TYPE VARCHAR(11);
-ALTER TABLE stage_irrigationdataraw ALTER COLUMN irrigation_method SET DATA TYPE VARCHAR(20);
-ALTER TABLE stage_irrigationdataraw ALTER COLUMN water_source SET DATA TYPE VARCHAR(20);
-ALTER TABLE stage_irrigationdataraw ALTER COLUMN timestamp SET DATA TYPE TIMESTAMP USING timestamp::TIMESTAMP;
-ALTER TABLE stage_irrigationdataraw ALTER COLUMN irrigation_duration_min SET DATA TYPE INT USING irrigation_duration_min::INT;
-
 ALTER TABLE stage_cropdataraw ALTER COLUMN crop_type SET DATA TYPE VARCHAR(20);
 ALTER TABLE stage_cropdataraw ALTER COLUMN growth_stage SET DATA TYPE VARCHAR(50);
 ALTER TABLE stage_cropdataraw ALTER COLUMN pest_issue SET DATA TYPE VARCHAR(20);

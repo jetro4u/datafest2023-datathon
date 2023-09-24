@@ -27,6 +27,9 @@ Identify fact Tables based on key performance indicators (KPIs) or metrics of yo
 Create and populate the initial fact tables using the cleaned and transformed data.
 [Check code here](https://github.com/jetro4u/datafest2023-datathon/blob/main/day2-task2.sql).
 
+I also include scripts for exporting the facts table from a SQL query to a csv file directily from the database using the `COPY` command.
+You can find the scripts in [Crop Facts](https://github.com/jetro4u/datafest2023-datathon/blob/main/scripts/create__insert_crop_fact.sql), [Check code here](https://github.com/jetro4u/datafest2023-datathon/blob/main/scripts/create__insert_soil_fact.sql).
+
 ##  Task 3: Define Primary Keys and Foreign Keys
 Define primary keys for dimension Tables.
 Define foreign keys in fact Tables to establish relationships with dimension Tables. Activities here was
@@ -45,24 +48,33 @@ Perform data quality checks and address any anomalies.
 Document the data model, including schema structure, table relationships, and data dictionary.
 Conduct final testing to ensure the accuracy and consistency of the data.
 Prepare the data warehouse for querying by data analysts and scientists.
-[Check code here](https://github.com/jetro4u/datafest2023-datathon/blob/main/day3-task2.sql).
+[Check code here](https://github.com/jetro4u/datafest2023-datathon/blob/main/day3-task2.md).
 
 #  FILE UPLOAD: 
 Because of the size of this files, I will provide link to download the files below.
 
-## SUB DIMENSION FILES
+The facts table below contain 100 rows sample due to the cost of the download. Full table data is available on request.
+
+## SUB DIMENSION TABLE
+
+ [Sub Dimension Files such as Irrigation Method, Crop Type
+Link](https://drive.google.com/file/d/1ZGZnIJV-XT7tWBy9bCwPKoZvWOHi88AA/view?usp=sharing). 
+
+
+## DIMENSION TABLES
+
+[Crop and Soil Dimension Tables](https://drive.google.com/file/d/1P1mVb9eiFnRWhCzawGWXNqSmwlXWn-Dz/view?usp=sharing). 
+
+[Irrigation and Sensor Dimension Tables](https://drive.google.com/file/d/1Y6PvJTpG2xKyD-Viz-8UWzo8X7LykgTU/view?usp=sharing). 
+
+[Pest and Weather Dimension Tables](https://drive.google.com/file/d/1ltZ7cwoM4ZRm-CVibQtNSLuV8aVJy8oo/view?usp=sharing). 
+
+
 Sub Dimension Files such as Irrigation Method, Crop Type
-Link [Click here to download](https://drive.google.com/file/d/1ZGZnIJV-XT7tWBy9bCwPKoZvWOHi88AA/view?usp=sharing). 
+Link [Location and Time Dimension Tables](https://drive.google.com/file/d/1Wq466C8P1BfQhlNzPtoPzqODubk7fTNA/view?usp=sharing). 
 
+## FACTS TABLES
 
-# DIMENSION FILES
+[Crop Facts Table](https://drive.google.com/file/d/1Uymqc11AGy-DXDmTMLXtBe8HdGxWkDdG/view?usp=sharing). 
 
-[Crop and Soil Dimension](https://drive.google.com/file/d/1P1mVb9eiFnRWhCzawGWXNqSmwlXWn-Dz/view?usp=sharing). 
-
-[Irrigation ans Sensor](https://drive.google.com/file/d/1Y6PvJTpG2xKyD-Viz-8UWzo8X7LykgTU/view?usp=sharing). 
-
-[Pest and Weather](https://drive.google.com/file/d/1ltZ7cwoM4ZRm-CVibQtNSLuV8aVJy8oo/view?usp=sharing). 
-
-
-Sub Dimension Files such as Irrigation Method, Crop Type
-Link [Location and Time](https://drive.google.com/file/d/1Wq466C8P1BfQhlNzPtoPzqODubk7fTNA/view?usp=sharing). 
+[Soil Facts Table](https://drive.google.com/file/d/14qEz5M3tuWwwi2IYXO0aHZld_xpF5Dsp/view?usp=sharing). 
