@@ -75,6 +75,6 @@ Link [Location and Time Dimension Tables](https://drive.google.com/file/d/1Wq466
 
 ## FACTS TABLES
 
-[Crop Facts Table](https://drive.google.com/file/d/1Uymqc11AGy-DXDmTMLXtBe8HdGxWkDdG/view?usp=sharing). 
+[Crop Facts Table](https://drive.google.com/file/d/1x83bN1BCZDUnVs35hA4Wwk5VZjAE8BlX/view?usp=sharing). 
 
-[Soil Facts Table](https://drive.google.com/file/d/14qEz5M3tuWwwi2IYXO0aHZld_xpF5Dsp/view?usp=sharing). 
+[Soil Facts Table](https://drive.google.com/file/d/1N5hSNZczljx4oWVRAMQ-2Lf63DJiMPrf/view?usp=sharing). 
