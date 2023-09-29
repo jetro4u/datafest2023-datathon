@@ -289,4 +289,3 @@ FROM (
     UNION
     SELECT timestamp FROM sensordimension
 ) AS fulldate;
-
